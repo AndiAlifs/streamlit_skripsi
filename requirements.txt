@@ -1,6 +1,1 @@
-numpy
-pandas
 wordcloud
-textwrap
-matplotlib
-seaborn

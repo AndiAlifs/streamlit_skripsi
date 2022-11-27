@@ -4,6 +4,8 @@ import numpy as np
 import altair as alt
 import MySQLdb
 
+st.config.set_page_title("📊 Chatbot Real-time Insight")
+
 # setup database
 db = MySQLdb.connect(host="db-mysql-sgp1-73465-do-user-12035841-0.b.db.ondigitalocean.com", 
                     user="doadmin", 

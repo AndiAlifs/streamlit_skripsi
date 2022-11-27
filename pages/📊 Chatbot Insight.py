@@ -15,6 +15,17 @@ db = MySQLdb.connect(host="db-mysql-sgp1-73465-do-user-12035841-0.b.db.ondigital
                     port=25060,
                     ssl={'ca': 'ca-certificate.crt'})
 
+st.subheader('Log Seluruh Pertanyaan')
+sql = "SELECT tag FROM log_chatbot group by tag"
+df_tag = pd.read_sql(sql, db)
+tag = st.selectbox('Pilih Tag', ["Semua Tag"] + df_tag['tag'].tolist())
+if tag == "Semua Tag":
+    sql = "SELECT waktu,pertanyaan,tag FROM log_chatbot"
+else: 
+    sql = "SELECT waktu,pertanyaan,tag FROM log_chatbot WHERE tag = '{}'".format(tag)
+df = pd.read_sql(sql, db)
+st.dataframe(df)
+
 st.subheader('Persebaran Kategori Pertanyaan')
 sql = "SELECT tag, COUNT(*) as jumlah  FROM log_chatbot GROUP BY tag ;"
 df = pd.read_sql(sql, db)

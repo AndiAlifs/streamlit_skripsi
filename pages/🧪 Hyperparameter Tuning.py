@@ -19,5 +19,5 @@ st.subheader('Batch Loss')
 st.image('images/batch_loss.png')
 
 st.subheader('Hasil Eksperimen')
-df = pd.read_csv('hyperparameter_result.csv', delimiter=';')
+df = pd.read_csv('hparams_table.csv', delimiter=',')
 st.dataframe(df,use_container_width=True)

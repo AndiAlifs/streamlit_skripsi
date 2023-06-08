@@ -35,6 +35,8 @@ sql = "SELECT tag, COUNT(*) as jumlah  FROM log_chatbot GROUP BY tag ;"
 r = requests.get(endpoint + sql)
 decoded = r.json()
 df = pd.DataFrame(decoded)
+df['jumlah'] = df['jumlah'].astype(int)
+df = df.sort_values(by='jumlah', ascending=False)
 
 fig = alt.Chart(df).mark_bar().encode(
     x='tag',
@@ -56,7 +58,7 @@ df = pd.DataFrame(decoded)
 # make stacked bar chart
 fig = alt.Chart(df).mark_bar(size=80).encode(
     alt.X('tanggal:T', title='Tanggal', axis=alt.Axis(format='%d %b %Y')),
-    y='jumlah',
+    alt.Y('jumlah:Q', title='Jumlah'),
     color='tag'
 ).configure_axis(
     grid=False,
